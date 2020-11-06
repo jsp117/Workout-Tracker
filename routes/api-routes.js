@@ -17,16 +17,23 @@ module.exports = function (app) {
     // add exercise
     app.put("/api/workouts/:id", (req, res) => {
         console.log("req", req);
-        console.log("id", req.params.id);
-        db.update({ _id: req.params.id },
+        console.log("body", req.body);
+        console.log("params", req.params.id);
+        db.update({ "_id": req.params.id },
             {
                 $push: { exercises: req.body }
-            }).then(workout => res.json(workout));
+            }).then((error, data) => {
+                if (error) {
+                    res.json(error)
+                } else {
+                    res.json(data);
+                }
+            });
     });
 
     // create workout
     app.post("/api/workouts", (req, res) => {
-        db.create()
+        db.create({})
             .then(workout => {
                 res.json(workout);
             }).catch(err => {
