@@ -1,12 +1,11 @@
 // require models
 const db = require("../models/Workout.js");
-const mongojs = require("../node_modules/mongodb");
 
 module.exports = function (app) {
 
     // get last workout
     app.get("/api/workouts", (req, res) => {
-        db.find()
+        db.find({})
             .then(workout => {
                 res.json(workout);
             }).catch(err => {
@@ -42,8 +41,13 @@ module.exports = function (app) {
     });
 
     // get workouts in range
-    app.post("/api/workouts/range", (req, res) => {
-
+    app.get("/api/workouts/range", (req, res) => {
+        db.find({})
+            .then(workout => {
+                res.json(workout)
+            }).catch(err => {
+                res.json(err);
+            })
     });
 
 }
