@@ -26,7 +26,8 @@ function tallyExercises(exercises) {
       acc.totalSets = (acc.totalSets || 0) + curr.sets;
       acc.totalReps = (acc.totalReps || 0) + curr.reps;
     } else if (curr.type === "cardio") {
-      acc.totalDistance = (acc.totalDistance || 0) + curr.distance;
+      console.log("distance test", acc.totalDistance, curr.distance);
+      acc.totalDistance = (parseInt(acc.totalDistance) || 0) + parseInt(curr.distance);
     }
     return acc;
   }, {});
