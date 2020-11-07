@@ -21,12 +21,9 @@ module.exports = function (app) {
         db.update({ "_id": req.params.id },
             {
                 $push: { exercises: req.body }
-            }).then((error, data) => {
-                if (error) {
-                    res.json(error)
-                } else {
-                    res.json(data);
-                }
+            }).then(data => res.json(data))
+            .catch(error => {
+                res.json(error);
             });
     });
 
@@ -49,5 +46,4 @@ module.exports = function (app) {
                 res.json(err);
             })
     });
-
 }
