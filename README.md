@@ -4,7 +4,7 @@
 
 This application is a workout tracker built with mongodb to store all data. It is designed as an exercise in building out the backend of an application when given a complete front end. The first step in building the backend was to create a model for MongoDB based off the front end and seed file. After completing this, I built the HTML routes to connect with the front end JS files, making  routes for the index, stats and exercise pages. The next step was to build out API routes to send data back to the front end when requested. When users load the page, they can see the last workout routine they inputted. This is accomplished on the backend through the MongoDB find method, which finds all data if not given any key: value pair to search for. Confirming that this worked, I moved on to the create workout route, which utilizes the create method to insert user inputted data into the database. The next step was to allow exercises to be inputted, which utilizes the MongoDB update method to push a new exercise into the array of exercises set up by the schema, where the id of the workout is the last used workout. When a user clicks new workout, a new workout routine is started with a different ID to hold exercises. In order to display the total duration of exercises in a given routine, I added a virtual to the schema that reduces the values of exercise.duration in the array to a sum of all inputted data.
 
-![Gif of Use](/public/assets/ADDNEWGIF)
+![Usage](/public/assets/workout.gif)
 
 ## Table of Contents
 * [Description](#description)
@@ -18,7 +18,7 @@ This application is a workout tracker built with mongodb to store all data. It i
 
 ## Deployed Link
 
-* [See Live Site](https://ADDURL/)
+* [See Live Site](https://jsp-workout-buddy.herokuapp.com/)
 
 
 ## Code_Snippets
