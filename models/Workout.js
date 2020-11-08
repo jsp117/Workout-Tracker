@@ -28,6 +28,7 @@ WorkoutSchema.virtual("totalDuration").get(function () {
     // reduce(accumulator, currentvalue) returns sum of values
     return this.exercises.reduce((accumulator, currentval) => {
         return accumulator + currentval.duration;
+        // initial value 0
     }, 0);
 });
 

@@ -21,7 +21,8 @@ module.exports = function (app) {
         db.update({ "_id": req.params.id },
             {
                 $push: { exercises: req.body }
-            }).then(data => res.json(data))
+            })
+            .then(data => res.json(data))
             .catch(error => {
                 res.json(error);
             });
