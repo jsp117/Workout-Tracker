@@ -13,8 +13,16 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // create connection to mongodb
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useUnifiedTopology: true });
-
+mongoose.connect(
+    process.env.MONGODB_URI || 'mongodb://localhost/workout',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false
+    }
+  );
+  
 // Require routes
 require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
