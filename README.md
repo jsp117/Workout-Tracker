@@ -23,10 +23,57 @@ This application is a workout tracker built with mongodb to store all data. It i
 
 ## Code_Snippets
 
-This code snippet...
+This code snippet displays the mongodb model used for this application. It includes an array of exercises that is modified each time a user enters a new exercise. The virtual added toward the end is used to add up all duration values to return the total duration of the workout. The toJSON statement allows the total duration to be displayed on the client side. 
+
+```
+const WorkoutSchema = new Schema({
+    day: { type: Date, default: Date.now },
+    exercises: [
+        {
+            type: { type: String, trim: true },
+            name: { type: String, trim: true },
+            duration: { type: Number },
+            weight: { type: Number },
+            reps: { type: Number },
+            sets: { type: Number },
+            distance: {type: Number},
+        }
+    ]
+},
+    {
+        // virtual field will be displayed on client side
+        toJSON: {
+            virtuals: true
+        }
+    }
+);
+
+// add virtual to schema - similar to custom method
+WorkoutSchema.virtual("totalDuration").get(function () {
+    // reduce(accumulator, currentvalue) returns sum of values
+    return this.exercises.reduce((accumulator, currentval) => {
+        return accumulator + currentval.duration;
+    }, 0);
+});
 
 ```
 
+This code snippet shows the backend route to add exercises. Because exercises is an array, we use the update mongodb method to select the current workout by id, and then the $push method to add the new exercise into the array. 
+
+```
+   // add exercise
+    app.put("/api/workouts/:id", (req, res) => {
+        // console.log("req", req);
+        // console.log("body", req.body);
+        // console.log("params", req.params.id);
+        db.update({ "_id": req.params.id },
+            {
+                $push: { exercises: req.body }
+            }).then(data => res.json(data))
+            .catch(error => {
+                res.json(error);
+            });
+    });
 ```
 
 
